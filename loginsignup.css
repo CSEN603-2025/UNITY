@@ -1,0 +1,205 @@
+/* SCAD Professional Network - Germany Color Theme */
+.scad-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #f8f8f8;
+  font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+/* Header with black background and gold logo */
+.scad-header {
+  background-color: #000000; /* Black */
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.scad-logo {
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.scad-logo-text {
+  color: #FFCC00; /* Gold */
+  text-transform: uppercase;
+}
+
+/* Form container with red accent */
+.scad-form-container {
+  max-width: 480px;
+  width: 90%;
+  margin: 3rem auto;
+  background: white;
+  border-radius: 8px;
+  padding: 2.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border-top: 5px solid #DD0000; /* Red */
+}
+
+.scad-form-header {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.scad-form-header h2 {
+  font-size: 1.8rem;
+  color: #222;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.scad-form-header p {
+  color: #666;
+  font-size: 1rem;
+}
+
+/* Input fields */
+.scad-input-group {
+  margin-bottom: 1.2rem;
+}
+
+.scad-input-group input,
+.scad-select {
+  width: 100%;
+  padding: 0.9rem 1.2rem;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  transition: all 0.25s ease;
+}
+
+.scad-input-group input:focus,
+.scad-select:focus {
+  border-color: #DD0000; /* Red */
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(221, 0, 0, 0.1);
+}
+
+/* Custom dropdown arrow */
+.scad-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23DD0000'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1.2rem;
+}
+
+/* Button with German red */
+.scad-submit-btn {
+  width: 100%;
+  padding: 1rem;
+  background-color: #DD0000; /* Red */
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: all 0.25s ease;
+}
+
+.scad-submit-btn:hover {
+  background-color: #C00000; /* Darker red */
+  transform: translateY(-1px);
+}
+
+/* Divider line */
+.scad-divider {
+  display: flex;
+  align-items: center;
+  margin: 1.8rem 0;
+  color: #999;
+}
+
+.scad-divider::before,
+.scad-divider::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid #eee;
+}
+
+.scad-divider span {
+  padding: 0 1rem;
+  font-size: 0.9rem;
+}
+
+/* Toggle between login/signup */
+.scad-toggle-container {
+  text-align: center;
+  margin-top: 1.5rem;
+  color: #555;
+  font-size: 1rem;
+}
+
+.scad-toggle-container span {
+  color: #DD0000; /* Red */
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.scad-toggle-container span:hover {
+  text-decoration: underline;
+}
+
+/* Logo upload styles */
+.scad-upload-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 1.5rem;
+  border: 2px dashed #ddd;
+  border-radius: 6px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.25s ease;
+}
+
+.scad-upload-label:hover {
+  border-color: #DD0000; /* Red */
+  background-color: #FFF5F5;
+}
+
+.upload-icon {
+  font-size: 1.8rem;
+  color: #DD0000; /* Red */
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.scad-upload-input {
+  display: none;
+}
+
+.logo-preview-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo-preview {
+  width: 5rem;
+  height: 5rem;
+  object-fit: contain;
+  margin-bottom: 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #eee;
+  background: white;
+  padding: 0.5rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+  .scad-form-container {
+    padding: 1.5rem;
+    width: 95%;
+  }
+  
+  .scad-logo {
+    font-size: 1.8rem;
+  }
+}
