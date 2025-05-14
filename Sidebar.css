@@ -1,0 +1,41 @@
+.sidebar {
+  height: 100vh;
+  width: 220px;
+  background-color: #C8102E;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  /* ❌ remove position: fixed, top, left */
+  /* ✅ let it flow naturally with flexbox */
+}
+
+.sidebar-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+.sidebar-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-item {
+  margin-bottom: 20px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.sidebar-item:hover {
+  color: #FFD100;
+}
+.sidebar-item a {
+  color: white;
+  text-decoration: none;
+}
+
+.sidebar-item a:hover {
+  color: #FFD100;
+}
