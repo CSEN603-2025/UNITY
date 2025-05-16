@@ -1,0 +1,411 @@
+/* ApplicationDetails.css */
+.application-details-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+}
+
+.application-header {
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+  position: relative;
+}
+
+.application-header h1 {
+  color: #000;
+  font-size: 2rem;
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.back-button {
+  background: none;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.back-button:hover {
+  background-color: #f5f5f5;
+  color: #DD0000;
+}
+
+.application-card {
+  background: #f9f9f9;
+  border-radius: 8px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.applicant-profile {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+.applicant-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: #DD0000;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.applicant-meta {
+  flex: 1;
+}
+
+.applicant-meta h2 {
+  color: #222;
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.applied-position {
+  color: #666;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.status-badge.pending {
+  background-color: #FFF3CD;
+  color: #856404;
+}
+
+.status-badge.finalized {
+  background-color: #E6F7EE;
+  color: #0A6640;
+}
+
+.status-badge.accepted {
+  background-color: #D1E7DD;
+  color: #0F5132;
+}
+
+.status-badge.rejected {
+  background-color: #F8D7DA;
+  color: #842029;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.detail-section {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.detail-section h3 {
+  color: #333;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.info-item {
+  margin-bottom: 0.8rem;
+}
+
+.info-item label {
+  display: block;
+  font-weight: 600;
+  color: #555;
+  font-size: 0.9rem;
+  margin-bottom: 0.2rem;
+}
+
+.info-item p {
+  color: #333;
+  line-height: 1.4;
+}
+
+.current-status {
+  text-transform: capitalize;
+  font-weight: 600;
+}
+
+.experience-list {
+  list-style-type: none;
+}
+
+.experience-item {
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px dashed #eee;
+}
+
+.experience-item:last-child {
+  border-bottom: none;
+}
+
+.experience-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.3rem;
+}
+
+.experience-duration {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.experience-company {
+  color: #DD0000;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.experience-description {
+  color: #444;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.documents-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.document-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.document-card:hover {
+  background: #f0f0f0;
+}
+
+.document-icon {
+  width: 40px;
+  height: 40px;
+  background: #DD0000;
+  color: white;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+
+.document-info {
+  flex: 1;
+}
+
+.document-name {
+  font-weight: 500;
+  margin-bottom: 0.2rem;
+}
+
+.document-type {
+  color: #666;
+  font-size: 0.8rem;
+  text-transform: capitalize;
+}
+
+.download-button {
+  background: none;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.download-button:hover {
+  color: #DD0000;
+  background: #f8f0f0;
+}
+
+.skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.skill-tag {
+  background: #f0f5ff;
+  color: #1A56DB;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+}
+
+.notes-section textarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  font-family: inherit;
+}
+
+.save-notes {
+  background: #DD0000;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.2s;
+}
+
+.save-notes:hover {
+  background: #BB0000;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #eee;
+  flex-wrap: wrap;
+}
+
+.action-button {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s;
+  flex: 1;
+  justify-content: center;
+}
+
+.action-button.accept {
+  background-color: #D1E7DD;
+  color: #0F5132;
+  border: 1px solid #BADBCC;
+}
+
+.action-button.accept:hover, .action-button.accept.active {
+  background-color: #BADBCC;
+}
+
+.action-button.reject {
+  background-color: #F8D7DA;
+  color: #842029;
+  border: 1px solid #F1BEBE;
+}
+
+.action-button.reject:hover, .action-button.reject.active {
+  background-color: #F1BEBE;
+}
+
+.action-button.finalize {
+  background-color: #E6F7EE;
+  color: #0A6640;
+  border: 1px solid #D1EFE0;
+}
+
+.action-button.finalize:hover, .action-button.finalize.active {
+  background-color: #D1EFE0;
+}
+
+.not-found {
+  text-align: center;
+  padding: 3rem;
+}
+
+.not-found i {
+  font-size: 3rem;
+  color: #DD0000;
+  margin-bottom: 1rem;
+}
+
+.not-found h2 {
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+.back-to-list {
+  background-color: #DD0000;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.back-to-list:hover {
+  background-color: #BB0000;
+}
+
+.no-info {
+  color: #666;
+  font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .applicant-profile {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+  }
+  
+  .action-button {
+    width: 100%;
+  }
+}
