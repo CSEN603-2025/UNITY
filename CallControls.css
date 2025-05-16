@@ -1,0 +1,15 @@
+.controls {
+  margin: 20px;
+}
+.controls button {
+  margin: 5px;
+  padding: 10px 15px;
+  background-color: black;
+  color: yellow;
+  border: 1px solid red;
+  cursor: pointer;
+}
+.leave {
+  background-color: red;
+  color: white;
+}

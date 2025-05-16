@@ -28,6 +28,14 @@
   color: #61dafb;
 }
 
+
+.main-content {
+  margin-left: 220px; /* exact width of Sidebar */
+  width: calc(100% - 220px);
+}
+
+
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -36,3 +44,27 @@
     transform: rotate(360deg);
   }
 }
+
+.App {
+  text-align: center;
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  background-color: white;
+  color: black;
+}
+
+.screen-share-box {
+  border: 2px dashed yellow;
+  padding: 20px;
+  margin-top: 15px;
+  background-color: #fffbe6;
+}
+
+.scad-left-banner {
+  margin-top: 15px;
+  padding: 10px;
+  background-color: red;
+  color: white;
+  font-weight: bold;
+}
+
