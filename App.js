@@ -1,199 +1,172 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import './ApplicationsList.css';
+import './App.css';
+import Loginsignup from './loginsignup.jsx';
+import Dashboard from './dashboard.jsx';
+import Uploader from './uploader.jsx';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Notifications from './Notifications';
+import ApplicationsList from './ApplicationsList.jsx';
+import ApplicationDetails from './ApplicationDetails';
+import Evaluation from './Evaluation';
+import { useState } from 'react';
 
-const ApplicationsList = ({ applications = [], internships = [], onStatusChange }) => {
-  const history = useHistory();
-  const [searchTerm, setSearchTerm] = useState('');
-  const [filters, setFilters] = useState({
-    status: 'all',
-    internship: 'all',
-    dateRange: 'all',
-    sortBy: 'newest'
-  });
-
-  const filteredApplications = applications.filter(app => {
-    const matchesSearch = 
-      app.applicantName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      internships.find(i => i.id === app.internshipId)?.position.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesStatus = filters.status === 'all' || app.status === filters.status;
-    const matchesInternship = filters.internship === 'all' || app.internshipId.toString() === filters.internship;
-    const appDate = new Date(app.applicationDate);
-    const now = new Date();
-    let matchesDate = true;
-    
-    if (filters.dateRange === 'last7') {
-      const sevenDaysAgo = new Date(now.setDate(now.getDate() - 7));
-      matchesDate = appDate >= sevenDaysAgo;
-    } else if (filters.dateRange === 'last30') {
-      const thirtyDaysAgo = new Date(now.setDate(now.getDate() - 30));
-      matchesDate = appDate >= thirtyDaysAgo;
+function App() {
+  const [applications, setApplications] = useState([
+    {
+      id: 1,
+      applicantName: "Alice Johnson",
+      applicantEmail: "alice@example.com",
+      internshipId: 101,
+      status: "pending",
+      applicationDate: "2023-05-10",
+      education: {
+        university: "State University",
+        major: "Software Engineering",
+        year: "Senior",
+        gpa: "3.8"
+      },
+      experience: [
+        {
+          company: "Tech Corp",
+          role: "Junior Developer",
+          duration: "Summer 2022",
+          description: "Worked on frontend development"
+        }
+      ],
+      skills: ["React", "TypeScript", "UI/UX"],
+      documents: [
+        {
+          name: "Alice_Johnson_CV.pdf",
+          type: "cv",
+          url: "#"
+        }
+      ]
+    },
+    {
+      id: 2,
+      applicantName: "Bob Smith",
+      applicantEmail: "bob@example.com",
+      internshipId: 102,
+      status: "current",
+      startDate: "2023-06-01",
+      applicationDate: "2023-05-05",
+      education: {
+        university: "City College",
+        major: "Computer Science",
+        year: "Junior",
+        gpa: "3.5"
+      },
+      skills: ["Python", "Django", "SQL"],
+      documents: [
+        {
+          name: "Bob_Smith_Resume.pdf",
+          type: "cv",
+          url: "#"
+        }
+      ]
+    },
+    {
+      id: 3,
+      applicantName: "Sarah Williams",
+      applicantEmail: "sarah@example.com",
+      internshipId: 101,
+      status: "completed",
+      startDate: "2023-01-15",
+      endDate: "2023-04-30",
+      applicationDate: "2023-01-05",
+      education: {
+        university: "Tech Institute",
+        major: "Computer Engineering",
+        year: "Senior",
+        gpa: "3.9"
+      },
+      evaluation: {
+        performance: 4,
+        skills: ["JavaScript", "React", "Teamwork"],
+        strengths: "Excellent problem solver and quick learner",
+        areasForImprovement: "Could improve documentation skills",
+        recommendation: "hire",
+        finalComments: "Sarah was a valuable team member and we would definitely hire her."
+      },
+      documents: [
+        {
+          name: "Sarah_W_Resume.pdf",
+          type: "cv",
+          url: "#"
+        }
+      ]
     }
-    
-    return matchesSearch && matchesStatus && matchesInternship && matchesDate;
-  });
+  ]);
 
-  const sortedApplications = [...filteredApplications].sort((a, b) => {
-    const dateA = new Date(a.applicationDate);
-    const dateB = new Date(b.applicationDate);
-    return filters.sortBy === 'newest' ? dateB - dateA : dateA - dateB;
-  });
-
-  const handleViewDetails = (applicationId) => {
-    history.push(`/applications/${applicationId}`);
-  };
-
-  const handleFilterChange = (filterName, value) => {
-    setFilters(prev => ({ ...prev, [filterName]: value }));
-  };
-
-  const resetFilters = () => {
-    setFilters({
-      status: 'all',
-      internship: 'all',
-      dateRange: 'all',
-      sortBy: 'newest'
-    });
-    setSearchTerm('');
-  };
+  const [internships, setInternships] = useState([
+    {
+      id: 101,
+      position: "Frontend Developer Intern",
+      type: "paid",
+      duration: "3 months",
+      status: "active"
+    },
+    {
+      id: 102,
+      position: "Backend Developer Intern",
+      type: "paid",
+      duration: "6 months",
+      status: "active"
+    }
+  ]);
 
   const handleStatusChange = (applicationId, newStatus) => {
-    if (onStatusChange) {
-      onStatusChange(applicationId, newStatus);
-    }
+    setApplications(prev => prev.map(app => {
+      if (app.id === applicationId) {
+        const updatedApp = { ...app, status: newStatus };
+        if (newStatus === 'current') {
+          updatedApp.startDate = new Date().toISOString().split('T')[0];
+        } else if (newStatus === 'completed') {
+          updatedApp.endDate = new Date().toISOString().split('T')[0];
+        }
+        return updatedApp;
+      }
+      return app;
+    }));
+  };
+
+  const handleSaveEvaluation = (applicationId, evaluation) => {
+    setApplications(prev => prev.map(app => 
+      app.id === applicationId 
+        ? { ...app, evaluation } 
+        : app
+    ));
   };
 
   return (
-    <div className="applications-container">
-      <div className="applications-header">
-        <h1>Internship Management</h1>
-        <p>Track current and completed interns</p>
-      </div>
-
-      <div className="applications-controls">
-        <div className="search-box">
-          <input
-            type="text"
-            placeholder="Search interns..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
+    <Router>
+      <Switch>
+        <Route path="/applications" exact>
+          <ApplicationsList 
+            applications={applications} 
+            internships={internships}
+            onStatusChange={handleStatusChange}
           />
-          <i className="fas fa-search"></i>
-        </div>
-
-        <div className="filters-container">
-          <div className="filter-group">
-            <label>Status</label>
-            <select
-              value={filters.status}
-              onChange={(e) => handleFilterChange('status', e.target.value)}
-            >
-              <option value="all">All Statuses</option>
-              <option value="current">Current Interns</option>
-              <option value="completed">Completed Interns</option>
-            </select>
-          </div>
-
-          <div className="filter-group">
-            <label>Internship</label>
-            <select
-              value={filters.internship}
-              onChange={(e) => handleFilterChange('internship', e.target.value)}
-            >
-              <option value="all">All Internships</option>
-              {internships.map(internship => (
-                <option key={internship.id} value={internship.id}>
-                  {internship.position}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <button onClick={resetFilters} className="reset-filters">
-            Reset Filters
-          </button>
-        </div>
-      </div>
-
-      <div className="applications-summary">
-        <p>
-          Showing <strong>{sortedApplications.length}</strong> interns
-        </p>
-      </div>
-
-      <div className="applications-list">
-        {sortedApplications.length === 0 ? (
-          <div className="empty-state">
-            <i className="fas fa-user-graduate"></i>
-            <p>No interns found matching your criteria</p>
-          </div>
-        ) : (
-          <table className="applications-table">
-            <thead>
-              <tr>
-                <th>Intern</th>
-                <th>Position</th>
-                <th>Status</th>
-                <th>Start Date</th>
-                <th>End Date</th>
-                <th>Evaluation</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {sortedApplications.map(application => {
-                const internship = internships.find(i => i.id === application.internshipId);
-                return (
-                  <tr key={application.id}>
-                    <td>
-                      <div className="applicant-cell">
-                        <div className="applicant-avatar">
-                          {application.applicantName?.charAt(0) || 'A'}
-                        </div>
-                        {application.applicantName}
-                      </div>
-                    </td>
-                    <td>{internship?.position || 'Unknown'}</td>
-                    <td>
-                      <span className={`status-badge ${application.status}`}>
-                        {application.status}
-                      </span>
-                    </td>
-                    <td>{application.startDate ? new Date(application.startDate).toLocaleDateString() : '-'}</td>
-                    <td>{application.endDate ? new Date(application.endDate).toLocaleDateString() : '-'}</td>
-                    <td>
-                      {application.status === 'completed' ? (
-                        application.evaluation ? (
-                          <span className="evaluation-status completed">
-                            <i className="fas fa-check-circle"></i> Evaluated
-                          </span>
-                        ) : (
-                          <button 
-                            onClick={() => history.push(`/evaluation/${application.id}`)}
-                            className="evaluate-button"
-                          >
-                            Add Evaluation
-                          </button>
-                        )
-                      ) : '-'}
-                    </td>
-                    <td>
-                      <button 
-                        onClick={() => handleViewDetails(application.id)}
-                        className="view-button"
-                      >
-                        View
-                      </button>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        )}
-      </div>
-    </div>
+        </Route>
+        <Route path="/applications/:id">
+          <ApplicationDetails 
+            applications={applications} 
+            internships={internships}
+            onStatusChange={handleStatusChange}
+          />
+        </Route>
+        <Route path="/evaluation/:id">
+          <Evaluation 
+            applications={applications}
+            onSaveEvaluation={handleSaveEvaluation}
+          />
+        </Route>
+        <Route path="/notifications" component={Notifications} />
+        <Route exact path="/" component={Loginsignup} />
+        <Route path="/dashboard" component={Dashboard} />
+        <Route path="/uploader" component={Uploader} />
+      </Switch>
+    </Router>
   );
-};
+}
 
-export default ApplicationsList;
+export default App;
