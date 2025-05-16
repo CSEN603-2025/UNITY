@@ -15,13 +15,14 @@ import AssessmentPage from './pages/AssessmentPage';
 import WorkshopListPage from './pages/WorkshopListPage';
 import AppointmentPage from './pages/AppointmentPage';
 import NotificationBanner from './components/NotificationBanner';
-
+import FrontRoleSelector from './pages/FrontRoleSelector';
 function App() {
   return (
     <Router>
       <NotificationBanner /> {/* ✅ Outside of Routes */}
       <Routes>
-        <Route path="/" element={<LoginPage />} />
+        <Route path="/" element={<FrontRoleSelector />} />  
+        <Route path="/login" element={<LoginPage />} />
         <Route path="/dashboard" element={<PrivateRoute><StudentDashboard /></PrivateRoute>} />
         <Route path="/apply" element={<PrivateRoute><ApplyPage /></PrivateRoute>} />
         <Route path="/applications" element={<PrivateRoute><ApplicationsPage /></PrivateRoute>} />
