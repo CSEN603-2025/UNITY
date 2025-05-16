@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 import './ApplicationsList.css';
 
-const ApplicationsList = ({ applications = [], internships = [] }) => {
+const ApplicationsList = ({ applications = [], internships = [], onStatusChange }) => {
   const history = useHistory();
   const [searchTerm, setSearchTerm] = useState('');
   const [filters, setFilters] = useState({
@@ -13,18 +13,11 @@ const ApplicationsList = ({ applications = [], internships = [] }) => {
   });
 
   const filteredApplications = applications.filter(app => {
-    // Search filter
     const matchesSearch = 
       app.applicantName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
       internships.find(i => i.id === app.internshipId)?.position.toLowerCase().includes(searchTerm.toLowerCase());
-    
-    // Status filter
     const matchesStatus = filters.status === 'all' || app.status === filters.status;
-    
-    // Internship filter
     const matchesInternship = filters.internship === 'all' || app.internshipId.toString() === filters.internship;
-    
-    // Date range filter
     const appDate = new Date(app.applicationDate);
     const now = new Date();
     let matchesDate = true;
@@ -40,16 +33,10 @@ const ApplicationsList = ({ applications = [], internships = [] }) => {
     return matchesSearch && matchesStatus && matchesInternship && matchesDate;
   });
 
-  // Sort applications
   const sortedApplications = [...filteredApplications].sort((a, b) => {
     const dateA = new Date(a.applicationDate);
     const dateB = new Date(b.applicationDate);
-    
-    if (filters.sortBy === 'newest') {
-      return dateB - dateA;
-    } else {
-      return dateA - dateB;
-    }
+    return filters.sortBy === 'newest' ? dateB - dateA : dateA - dateB;
   });
 
   const handleViewDetails = (applicationId) => {
@@ -57,10 +44,7 @@ const ApplicationsList = ({ applications = [], internships = [] }) => {
   };
 
   const handleFilterChange = (filterName, value) => {
-    setFilters(prev => ({
-      ...prev,
-      [filterName]: value
-    }));
+    setFilters(prev => ({ ...prev, [filterName]: value }));
   };
 
   const resetFilters = () => {
@@ -71,6 +55,12 @@ const ApplicationsList = ({ applications = [], internships = [] }) => {
       sortBy: 'newest'
     });
     setSearchTerm('');
+  };
+
+  const handleStatusChange = (applicationId, newStatus) => {
+    if (onStatusChange) {
+      onStatusChange(applicationId, newStatus);
+    }
   };
 
   return (
@@ -144,19 +134,14 @@ const ApplicationsList = ({ applications = [], internships = [] }) => {
             </select>
           </div>
 
-          <button 
-            onClick={resetFilters}
-            className="reset-filters"
-          >
+          <button onClick={resetFilters} className="reset-filters">
             Reset Filters
           </button>
         </div>
       </div>
 
       <div className="applications-summary">
-        <p>
-          Showing <strong>{sortedApplications.length}</strong> of <strong>{applications.length}</strong> applications
-        </p>
+        <p>Showing <strong>{sortedApplications.length}</strong> of <strong>{applications.length}</strong> applications</p>
       </div>
 
       <div className="applications-list">
@@ -164,10 +149,7 @@ const ApplicationsList = ({ applications = [], internships = [] }) => {
           <div className="empty-state">
             <i className="fas fa-file-alt"></i>
             <p>No applications found matching your criteria</p>
-            <button 
-              onClick={resetFilters}
-              className="reset-button"
-            >
+            <button onClick={resetFilters} className="reset-button">
               Reset Filters
             </button>
           </div>
@@ -197,9 +179,16 @@ const ApplicationsList = ({ applications = [], internships = [] }) => {
                     </td>
                     <td>{internship?.position || 'Position not found'}</td>
                     <td>
-                      <span className={`status-badge ${application.status}`}>
-                        {application.status}
-                      </span>
+                      <select 
+                        value={application.status}
+                        onChange={(e) => handleStatusChange(application.id, e.target.value)}
+                        className="status-select"
+                      >
+                        <option value="pending">Pending</option>
+                        <option value="finalized">Finalized</option>
+                        <option value="accepted">Accepted</option>
+                        <option value="rejected">Rejected</option>
+                      </select>
                     </td>
                     <td>{new Date(application.applicationDate).toLocaleDateString()}</td>
                     <td>
