@@ -1,0 +1,273 @@
+
+.application-details-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+}
+
+.application-header {
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+  position: relative;
+}
+
+.application-header h1 {
+  color: #000;
+  font-size: 2rem;
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.back-button {
+  background: none;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.back-button:hover {
+  background-color: #f5f5f5;
+  color: #DD0000;
+}
+
+.application-card {
+  background: #f9f9f9;
+  border-radius: 8px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.applicant-info {
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+.applicant-info h2 {
+  color: #222;
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.applied-for {
+  color: #666;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.status-container {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.status-badge.pending {
+  background-color: #FFF3CD;
+  color: #856404;
+}
+
+.status-badge.finalized {
+  background-color: #E6F7EE;
+  color: #0A6640;
+}
+
+.status-badge.accepted {
+  background-color: #D1E7DD;
+  color: #0F5132;
+}
+
+.status-badge.rejected {
+  background-color: #F8D7DA;
+  color: #842029;
+}
+
+.applied-date {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.detail-section {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.detail-section h3 {
+  color: #333;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+.detail-section p {
+  margin-bottom: 0.8rem;
+  line-height: 1.5;
+}
+
+.detail-section strong {
+  color: #333;
+}
+
+.experience-list {
+  list-style-type: none;
+}
+
+.experience-list li {
+  margin-bottom: 0.8rem;
+  padding-left: 1rem;
+  position: relative;
+}
+
+.experience-list li:before {
+  content: "•";
+  color: #DD0000;
+  font-weight: bold;
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
+}
+
+.documents-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.document-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #DD0000;
+  text-decoration: none;
+  transition: all 0.2s;
+  padding: 0.5rem;
+  border-radius: 4px;
+}
+
+.document-link:hover {
+  background-color: #f8f0f0;
+}
+
+.document-link i {
+  font-size: 1.2rem;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #eee;
+  flex-wrap: wrap;
+}
+
+.action-button {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s;
+}
+
+.action-button.accept {
+  background-color: #D1E7DD;
+  color: #0F5132;
+}
+
+.action-button.accept:hover {
+  background-color: #BADBCC;
+}
+
+.action-button.reject {
+  background-color: #F8D7DA;
+  color: #842029;
+}
+
+.action-button.reject:hover {
+  background-color: #F1BEBE;
+}
+
+.action-button.finalize {
+  background-color: #E6F7EE;
+  color: #0A6640;
+}
+
+.action-button.finalize:hover {
+  background-color: #D1EFE0;
+}
+
+.not-found {
+  text-align: center;
+  padding: 3rem;
+}
+
+.not-found h2 {
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+.not-found button {
+  background-color: #DD0000;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.not-found button:hover {
+  background-color: #BB0000;
+}
+
+@media (max-width: 768px) {
+  .application-card {
+    padding: 1.5rem;
+  }
+  
+  .details-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+  }
+  
+  .action-button {
+    justify-content: center;
+  }
+}
