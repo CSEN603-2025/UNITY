@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import './ApplicationsList.css';
 
@@ -66,15 +66,15 @@ const ApplicationsList = ({ applications = [], internships = [], onStatusChange 
   return (
     <div className="applications-container">
       <div className="applications-header">
-        <h1>Applications Management</h1>
-        <p>View and filter all internship applications</p>
+        <h1>Internship Management</h1>
+        <p>Track current and completed interns</p>
       </div>
 
       <div className="applications-controls">
         <div className="search-box">
           <input
             type="text"
-            placeholder="Search applicants or positions..."
+            placeholder="Search interns..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -89,10 +89,8 @@ const ApplicationsList = ({ applications = [], internships = [], onStatusChange 
               onChange={(e) => handleFilterChange('status', e.target.value)}
             >
               <option value="all">All Statuses</option>
-              <option value="pending">Pending</option>
-              <option value="finalized">Finalized</option>
-              <option value="accepted">Accepted</option>
-              <option value="rejected">Rejected</option>
+              <option value="current">Current Interns</option>
+              <option value="completed">Completed Interns</option>
             </select>
           </div>
 
@@ -111,29 +109,6 @@ const ApplicationsList = ({ applications = [], internships = [], onStatusChange 
             </select>
           </div>
 
-          <div className="filter-group">
-            <label>Date Range</label>
-            <select
-              value={filters.dateRange}
-              onChange={(e) => handleFilterChange('dateRange', e.target.value)}
-            >
-              <option value="all">All Time</option>
-              <option value="last7">Last 7 Days</option>
-              <option value="last30">Last 30 Days</option>
-            </select>
-          </div>
-
-          <div className="filter-group">
-            <label>Sort By</label>
-            <select
-              value={filters.sortBy}
-              onChange={(e) => handleFilterChange('sortBy', e.target.value)}
-            >
-              <option value="newest">Newest First</option>
-              <option value="oldest">Oldest First</option>
-            </select>
-          </div>
-
           <button onClick={resetFilters} className="reset-filters">
             Reset Filters
           </button>
@@ -141,26 +116,27 @@ const ApplicationsList = ({ applications = [], internships = [], onStatusChange 
       </div>
 
       <div className="applications-summary">
-        <p>Showing <strong>{sortedApplications.length}</strong> of <strong>{applications.length}</strong> applications</p>
+        <p>
+          Showing <strong>{sortedApplications.length}</strong> interns
+        </p>
       </div>
 
       <div className="applications-list">
         {sortedApplications.length === 0 ? (
           <div className="empty-state">
-            <i className="fas fa-file-alt"></i>
-            <p>No applications found matching your criteria</p>
-            <button onClick={resetFilters} className="reset-button">
-              Reset Filters
-            </button>
+            <i className="fas fa-user-graduate"></i>
+            <p>No interns found matching your criteria</p>
           </div>
         ) : (
           <table className="applications-table">
             <thead>
               <tr>
-                <th>Applicant</th>
-                <th>Internship Position</th>
+                <th>Intern</th>
+                <th>Position</th>
                 <th>Status</th>
-                <th>Applied On</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Evaluation</th>
                 <th>Actions</th>
               </tr>
             </thead>
@@ -177,26 +153,36 @@ const ApplicationsList = ({ applications = [], internships = [], onStatusChange 
                         {application.applicantName}
                       </div>
                     </td>
-                    <td>{internship?.position || 'Position not found'}</td>
+                    <td>{internship?.position || 'Unknown'}</td>
                     <td>
-                      <select 
-                        value={application.status}
-                        onChange={(e) => handleStatusChange(application.id, e.target.value)}
-                        className="status-select"
-                      >
-                        <option value="pending">Pending</option>
-                        <option value="finalized">Finalized</option>
-                        <option value="accepted">Accepted</option>
-                        <option value="rejected">Rejected</option>
-                      </select>
+                      <span className={`status-badge ${application.status}`}>
+                        {application.status}
+                      </span>
                     </td>
-                    <td>{new Date(application.applicationDate).toLocaleDateString()}</td>
+                    <td>{application.startDate ? new Date(application.startDate).toLocaleDateString() : '-'}</td>
+                    <td>{application.endDate ? new Date(application.endDate).toLocaleDateString() : '-'}</td>
+                    <td>
+                      {application.status === 'completed' ? (
+                        application.evaluation ? (
+                          <span className="evaluation-status completed">
+                            <i className="fas fa-check-circle"></i> Evaluated
+                          </span>
+                        ) : (
+                          <button 
+                            onClick={() => history.push(`/evaluation/${application.id}`)}
+                            className="evaluate-button"
+                          >
+                            Add Evaluation
+                          </button>
+                        )
+                      ) : '-'}
+                    </td>
                     <td>
                       <button 
                         onClick={() => handleViewDetails(application.id)}
                         className="view-button"
                       >
-                        View Details
+                        View
                       </button>
                     </td>
                   </tr>
