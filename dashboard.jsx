@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import './dashboard.css';
+import { Link } from 'react-router-dom';
+import { FaBell } from 'react-icons/fa'; 
 
 const Dashboard = () => {
   const history = useHistory();
@@ -9,6 +11,7 @@ const Dashboard = () => {
   const [currentInternship, setCurrentInternship] = useState(null);
   const [notifications, setNotifications] = useState([]);
   const [applications, setApplications] = useState([]);
+  const [unreadCount, setUnreadCount] = useState(0);
   const [stats, setStats] = useState({
     totalViews: 0,
     applicationsReceived: 0,
@@ -201,9 +204,17 @@ const Dashboard = () => {
   return (
     <div className="dashboard-container">
       {/* Navigation */}
+      
       <nav className="dashboard-nav">
+        <Link to="/applications" className="nav-button">
+  <i className="fas fa-users"></i> Applications
+        </Link>
         <div className="nav-logo">SCAD</div>
         <div className="nav-actions">
+          <Link to="/notifications" className="nav-button notification-link">
+          <FaBell className="bell-icon" />
+          {unreadCount > 0 && <span className="unread-count">{unreadCount}</span>}
+        </Link>
           <button 
             onClick={() => history.push('/uploader')}
             className="nav-button"
